@@ -5,10 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 
+using System.Net.Mail;
+using System.Net;
+using System.IO;
+
 namespace CapaNegocio
 {
     public class CN_Recursos
     {
+
+        //Auto generacion de clave con 16 digitos alfanumericos
+        public static string GenerarClave()
+        {
+            string pass = Guid.NewGuid().ToString("N").Substring(0, 16);
+            return pass;
+        }
+
 
         //Encriptacion text to SHA256
 
@@ -26,6 +38,42 @@ namespace CapaNegocio
                     Sb.Append(b.ToString("x2"));
             }
             return Sb.ToString();
+        }
+
+
+        public static bool SendMail(string correo, string asunto, string mensaje)
+        {
+
+            bool result = false;
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(correo);
+                mail.From = new MailAddress("carloscerquinoropeza@gmail.com");
+                mail.Subject = asunto;
+                mail.Body = mensaje;
+                mail.IsBodyHtml = true;
+
+                var smtp = new SmtpClient()
+                {
+                    Credentials = new NetworkCredential("carloscerquinoropeza@gmail.com", "ofriebxgcjxgwjdf"),
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true
+                };
+
+                smtp.Send(mail);
+                result = true;
+
+            }
+            catch(Exception ex)
+            {
+            
+                result = true;
+            }
+
+            return result;
         }
 
     }
