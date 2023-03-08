@@ -72,8 +72,9 @@
                     <div class="col-sm-6">
                         <label for="cboActivo" class="form-label">Activo</label>
                         <select id="cboActivo" class="form-select">
+                            <option selected>Seleccionar..</option>
                             <option value="1">Si</option>
-                            <option value="">No</option>
+                            <option value="0">No</option>
 
                         </select>
                     </div>
@@ -259,7 +260,7 @@
                         if (data.resultado != 0) {
 
                             Usuario.IdUsuario = data.resultado;
-                            tabladata.row.add(Usuario).draw(flalse);
+                            tabladata.row.add(Usuario).draw(false);
                             $("#FormModal").modal("hide");
 
                         } else {
