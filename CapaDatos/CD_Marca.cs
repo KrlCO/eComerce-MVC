@@ -21,21 +21,26 @@ namespace CapaDatos
             {
                 using(SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "";
+                    string query = "sp_ListarMarcas";
 
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
+                    cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        lista.Add(new Marca()
+                        while (dr.Read())
                         {
-                            IdMarca = Convert.ToInt32(dr["ID"]),
-                            Descripcion = dr["Descripcion"].ToString(),
-                            Activo = Convert.ToBoolean(dr["Activo"])
-                        });
+                            lista.Add(new Marca()
+                            {
+                                IdMarca = Convert.ToInt32(dr["IdMarca"]),
+                                Descripcion = dr["Descripcion"].ToString(),
+                                Activo = Convert.ToBoolean(dr["Activo"])
+                            });
+                        }
+                    
                     }
                 }
             }
@@ -60,6 +65,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Descripcion", obj.Descripcion);
                     cmd.Parameters.AddWithValue("Activo", obj.Activo);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
@@ -124,6 +130,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand("sp_EliminarMarca", oconexion);
                     cmd.Parameters.AddWithValue("IdMarca", id);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
@@ -182,7 +189,7 @@ namespace CapaDatos
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 list = new List<Marca>();
 

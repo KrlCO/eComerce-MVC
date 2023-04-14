@@ -232,16 +232,16 @@
 
 
            jQuery.ajax({
-                url: '@Url.Action("GuardarMarca", "Mantenedor")',
+                url: '@Url.Action("RegistrarMarca", "Mantenedor")',
                 type: "POST",
-               data: JSON.stringify({ objeto: Marca}),
+               data: JSON.stringify({ obj: Marca}),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                success: function (data) {
 
                    $(".modal-body").LoadingOverlay("hide");
 
-                    //MARCA NUEVO
+                    //Registrar Nueva Marca
                    if (Marca.IdMarca == 0) {
 
                         if (data.resultado != 0) {
@@ -255,7 +255,7 @@
                             $("#mensajeError").show();
                         }
                     }
-                    //MARCA EDITAR
+                    //Editar Marca
                     else {
 
                         if (data.resultado) {
@@ -284,12 +284,7 @@
                 }
             });
 
-
-
-
         }
-
-
 
     </script>
 
