@@ -69,7 +69,7 @@
     </div>
     <div class="card-body">
 
-        <form action="/" method="post">
+        <form action="@Url.Action("ExportVenta", "Home")" method="post">
 
             <div class="row align-items-end">
                 <div class="col-sm-2">
@@ -141,8 +141,12 @@
     
     <script>
 
-        $("#txtFechaInicio").datepicker({dateFormat : 'dd/mm/yy'}).datepicker('setDate', new Date())
-        $("#txtFechaFin").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+        var tabladata;
+
+        $(document).ready(function (){
+
+                $("#txtFechaInicio").datepicker({dateFormat : 'dd/mm/yy'}).datepicker('setDate', new Date())
+                $("#txtFechaFin").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
 
         jQuery.ajax({
             url: '@Url.Action("ViewDashBoard", "Home")',
@@ -158,10 +162,49 @@
                 $("#totalProductos").text(obj.TotalProducto)
 
             }
-
-
         });
 
+        var Url = '@Url.Action("ListReport", "Home")' +
+            "?fechainicio=" + $("#txtFechaInicio").val() +
+            "&fechafin=" + $("#txtFechaFin").val() +
+             "&idtransaccion=" + $("#txtIdTransaccion").val()
+
+            tabladata = $("#tabla").DataTable({
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: Url,
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "FechaVenta" },
+                    { "data": "Cliente" },
+                    { "data": "Producto" },
+                    { "data": "Precio" },
+                    { "data": "Cantidad" },
+                    { "data": "Total" },
+                    { "data": "IdTransaccion" }
+                ],
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.13.2/i18n/es-ES.json"
+                }
+
+
+            });
+
+        })
+
+        $("#btnBuscar").on("click", function () {
+
+            var nueva_url = '@Url.Action("ListReport", "Home")' +
+                "?fechainicio=" + $("#txtFechaInicio").val() +
+                "&fechafin=" + $("#txtFechaFin").val() +
+                "&idtransaccion=" + $("#txtIdTransaccion").val()
+
+            tabladata.ajax.url(nueva_url).load();
+
+        })
 
 
 
