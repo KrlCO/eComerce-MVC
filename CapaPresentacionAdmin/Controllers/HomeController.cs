@@ -64,5 +64,26 @@ namespace CapaPresentacionAdmin.Controllers
             return Json(new {resultado = respuesta, mensaje = mensaje}, JsonRequestBehavior.AllowGet);
 
         }
+
+        [HttpGet]
+        public JsonResult ListReport(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<Report> oList = new List<Report>();
+
+            oList = new CN_Report().Ventas(fechainicio, fechafin, idtransaccion);
+
+            return Json(new { resultado = oList }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public JsonResult ViewDashBoard()
+        {
+            DashBoard obj = new CN_Report().VerDashBoard();
+
+            return Json(new { resultado = obj }, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
