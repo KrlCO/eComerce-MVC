@@ -90,3 +90,11 @@ D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\CapaDatos.dll
 D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\CapaEntidad.pdb
 D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\CapaNegocio.pdb
 D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\CapaDatos.pdb
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\ClosedXML.dll
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\DocumentFormat.OpenXml.dll
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\ExcelNumberFormat.dll
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\System.IO.Packaging.dll
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\ClosedXML.pdb
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\ClosedXML.xml
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\DocumentFormat.OpenXml.xml
+D:\Dev Services Web\CourseMVC\CapaPresentacionAdmin\bin\ExcelNumberFormat.xml

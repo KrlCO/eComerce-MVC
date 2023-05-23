@@ -57,7 +57,7 @@ namespace CapaNegocio
 
                 var smtp = new SmtpClient()
                 {
-                    Credentials = new NetworkCredential("carloscerquinoropeza@gmail.com", "ofriebxgcjxgwjdf"),
+                    Credentials = new NetworkCredential("carloscerquinoropeza@gmail.com", "ofpldytyhzevxakh"),
                     Host = "smtp.gmail.com",
                     Port = 587,
                     EnableSsl = true
@@ -77,7 +77,7 @@ namespace CapaNegocio
         }
 
 
-        //Convert strin to Base64
+        //Convert string to Base64
 
         public static string ConvertBase64(string rute, out bool conversion)
         {

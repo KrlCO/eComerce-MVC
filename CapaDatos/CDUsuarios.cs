@@ -160,9 +160,55 @@ namespace CapaDatos
         }
 
 
+        public bool ChangePassword(int idusuario, string nuevaclave, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection oConex = new SqlConnection(Conexion.cn))
+                {
 
+                    SqlCommand cmd = new SqlCommand("update usuario set clave = @nuevaclave, reestablecer = 0 where idusuario = @id", oConex);
+                    cmd.Parameters.AddWithValue("@id", idusuario);
+                    cmd.Parameters.AddWithValue("@nuevaclave", nuevaclave);
+                    cmd.CommandType = CommandType.Text;
+                    oConex.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
 
+        }
 
+        public bool ReestablecerPass(int idusuario, string pass, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            
+            try
+            {
+                using(SqlConnection oConex = new SqlConnection(Conexion.cn))
+                {
+                    SqlCommand cmd = new SqlCommand("update usuario set clave = @clave, reestablecer = 1 where idusuario = @id", oConex);
+                    cmd.Parameters.AddWithValue("@id", idusuario);
+                    cmd.Parameters.AddWithValue("clave", pass);
+                    oConex.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;   
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado=false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
+        }
 
 
 
