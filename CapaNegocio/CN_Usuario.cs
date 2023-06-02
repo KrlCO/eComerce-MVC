@@ -107,9 +107,9 @@ namespace CapaNegocio
         }
 
 
-        public bool ChangePassword(int idusuario, string nuevaclave, out string Mensaje)
+        public bool ChangePassword(int idusuario, string nuevaClave, out string Mensaje)
         {
-            return oCapaDato.ChangePassword(idusuario, nuevaclave, out Mensaje);
+            return oCapaDato.ChangePass(idusuario, nuevaClave, out Mensaje);
         }
 
         public bool ReestablecerPass(int idusuario, string correo, out string Mensaje)
@@ -118,7 +118,7 @@ namespace CapaNegocio
             string newpass = CN_Recursos.GenerarClave();
             bool resultado = oCapaDato.ReestablecerPass(idusuario, CN_Recursos.ConvertToSha256(newpass), out Mensaje);
 
-            if (string.IsNullOrEmpty(Mensaje))
+            if (resultado)
             {
                 string asunto = "Update Password";
                 string msj_mail = "<h3>Tu cuenta fue reestablecida correctamente</h3></br><p>Tu nuevo password es: ¡Password!</p>";

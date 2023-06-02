@@ -160,22 +160,25 @@ namespace CapaDatos
         }
 
 
-        public bool ChangePassword(int idusuario, string nuevaclave, out string Mensaje)
+        public bool ChangePass(int idusuario, string nuevaClave, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
+
             try
             {
-                using (SqlConnection oConex = new SqlConnection(Conexion.cn))
+                using (SqlConnection xconec = new SqlConnection(Conexion.cn))
                 {
-
-                    SqlCommand cmd = new SqlCommand("update usuario set clave = @nuevaclave, reestablecer = 0 where idusuario = @id", oConex);
+                    SqlCommand cmd = new SqlCommand("update usuario set clave = @nuevaClave, reestablecer = 0 where idusuario = @id", xconec);
                     cmd.Parameters.AddWithValue("@id", idusuario);
-                    cmd.Parameters.AddWithValue("@nuevaclave", nuevaclave);
+                    cmd.Parameters.AddWithValue("@nuevaClave", nuevaClave);
                     cmd.CommandType = CommandType.Text;
-                    oConex.Open();
+
+                    xconec.Open();
                     resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -190,27 +193,80 @@ namespace CapaDatos
         {
             bool resultado = false;
             Mensaje = string.Empty;
-            
+
             try
             {
-                using(SqlConnection oConex = new SqlConnection(Conexion.cn))
+                using (SqlConnection oConex = new SqlConnection(Conexion.cn))
                 {
                     SqlCommand cmd = new SqlCommand("update usuario set clave = @clave, reestablecer = 1 where idusuario = @id", oConex);
                     cmd.Parameters.AddWithValue("@id", idusuario);
-                    cmd.Parameters.AddWithValue("clave", pass);
+                    cmd.Parameters.AddWithValue("@clave", pass);
                     oConex.Open();
-                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;   
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
                 }
             }
             catch (Exception ex)
             {
-                resultado=false;
+                resultado = false;
                 Mensaje = ex.Message;
             }
             return resultado;
         }
 
 
+        //public bool CambiarClave(int idusuario, string nuevaClave, out string Mensaje)
+        //{
+        //    bool resultado = false;
+        //    Mensaje = string.Empty;
+        //    try
+        //    {
+        //        using (SqlConnection xconec = new SqlConnection(Conexion.cn))
+        //        {
+        //            SqlCommand cmd = new SqlCommand("sp_UpdatePass", xconec);
+        //            cmd.Parameters.AddWithValue("@id", idusuario);
+        //            cmd.Parameters.AddWithValue("@nuevaClave", nuevaClave);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            xconec.Open();
+        //            resultado = cmd.ExecuteNonQuery() >= 0 ? true : false;
+        //        }
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        resultado = false;
+        //        Mensaje = ex.Message;
+        //    }
+        //    return resultado;
+
+        //}
+
+        //public bool ReestablecerClave(int idusuario, string clave, out string Mensaje)
+        //{
+        //    bool resultado = false;
+        //    Mensaje = string.Empty;
+
+        //    try
+        //    {
+        //        using (SqlConnection xConex = new SqlConnection(Conexion.cn))
+        //        {
+        //            SqlCommand cmd = new SqlCommand("update usuario set clave = @clave, reestablecer = 1 where idusuario = @id", xConex);
+        //            cmd.Parameters.AddWithValue("@id", idusuario);
+        //            cmd.Parameters.AddWithValue("@clave", clave);
+        //            cmd.CommandType = CommandType.Text;
+
+        //            xConex.Open();
+        //            resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        resultado=false;
+        //        Mensaje = ex.Message;
+        //    }
+        //    return resultado;
+        //}
 
 
     }

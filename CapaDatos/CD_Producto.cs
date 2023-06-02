@@ -195,6 +195,8 @@ namespace CapaDatos
 
                     conec.Open();
 
+                    cmd.ExecuteNonQuery();
+
                     resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
                     Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
                 }
