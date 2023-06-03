@@ -50,13 +50,13 @@ namespace CapaPresentacionAdmin.Controllers
                     TempData["IdUsuario"] = oUser.IdUsuario;
                     return RedirectToAction("ChangePassword");
                 }
+
+                FormsAuthentication.SetAuthCookie(oUser.Correo, false);
+
+                ViewBag.Error = null;
+
+                return RedirectToAction("Index", "Home");
             }
-
-            FormsAuthentication.SetAuthCookie(oUser.Correo, false);
-
-            ViewBag.Error = null;
-
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -128,6 +128,13 @@ namespace CapaPresentacionAdmin.Controllers
                 ViewBag.Error = mensaje;
                 return View();
             }
+        }
+
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("Index", "Acceso");
         }
 
 
