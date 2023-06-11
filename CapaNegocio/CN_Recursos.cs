@@ -67,7 +67,7 @@ namespace CapaNegocio
                 result = true;
 
             }
-            catch(Exception ex)
+            catch
             {
             
                 result = true;

@@ -164,7 +164,7 @@ namespace CapaDatos
 
                     sb.AppendLine("select distinct m.IdMarca m.Descripcion from Producto p");
                     sb.AppendLine("inner join Categoria c on c.IdCategoria = p.IdCategoria");
-                    sb.AppendLine("inner join Marca m on m.IdMarca = p.idMarca and m.Activo = 1");
+                    sb.AppendLine("inner join Marca m on m.IdMarca = p.IdMarca and m.Activo = 1");
                     sb.AppendLine("where c.IdCategoria = iif(@IdCategoria = 0, c.IdCategoria, @IdCategoria)");
 
                     SqlCommand cmd = new SqlCommand(sb.ToString(), oconexion);
