@@ -125,10 +125,10 @@ namespace CapaPresentacionTienda.Controllers
         public JsonResult ListarProductosCarrito()
         {
 
-            //Cliente cliente = Session["Cliente"] as Cliente;
-            //int idcliente = cliente != null ? cliente.IdCliente : 0; // Asignar un valor predeterminado en caso de que el objeto Cliente sea nulo
+            Cliente cliente = Session["Cliente"] as Cliente;
+            int idcliente = cliente != null ? cliente.IdCliente : 0; // Asignar un valor predeterminado en caso de que el objeto Cliente sea nulo
 
-            int idcliente = ((Cliente)Session["Cliente"]).IdCliente;
+            //int idcliente = ((Cliente)Session["Cliente"]).IdCliente;
 
             List<Carrito> oLista = new List<Carrito>();
 
@@ -150,8 +150,8 @@ namespace CapaPresentacionTienda.Controllers
 
             }).ToList();
 
-            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
-
+            //return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = oLista });
         }
 
 
